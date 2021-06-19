@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.compliment {
+  display: flex;
+  align-items: center;
+}
+
 .input-wrapper {
   display: flex;
   flex-direction: row-reverse;

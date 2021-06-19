@@ -9,5 +9,8 @@
             <input matInput placeholder={{placeholder}} [ngModel]="value" (ngModelChange)="checkValueExist(value=$event)" [ngModelOptions]="{standalone:true}">
         </mat-form-field>
     </form>
+    </div> 
+    <div class="compliment" *ngIf="showCompliment && !inputOpened">
+        {{compliment}}
     </div>
 </div>

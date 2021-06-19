@@ -20,11 +20,8 @@ export class FactsService {
     reportProgress: false
   }
 
-  // private params = new HttpParams()
-  // .set('page', PageNo)
-
-  public getFacts$(factType: string) {
-    return this.http.get(this.rootURL + `/${factType}`).pipe(map(data => data));
+  public getFacts$(factType: string, countFacts: number) {
+    return this.http.get(this.rootURL + `/${factType}?count=${countFacts}`).pipe(map(data => data));
   }
 
   public saveFacts$(data: any) {

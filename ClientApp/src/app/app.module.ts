@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { FactsComponent } from './facts/facts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import {MatButtonModule} from '@angular/material/button';
 import { InputFormComponent } from './input-form/input-form.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -24,7 +23,6 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     HttpClientModule,
-    MatButtonModule,
     MatIconModule,
     MatInputModule,
     FormsModule

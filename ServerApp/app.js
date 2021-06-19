@@ -28,19 +28,20 @@ app.use((req, res, next) => {
 
 
 app.get('/my-facts', (req, res) => {
-  if (!req.cookies.cookieName) return res.status(401).send();
+  if (!factsByCookie[req.cookies.cookieName]) return res.send([]);
   let cookieKey = req.cookies.cookieName
   res.status(200).json(factsByCookie[cookieKey].facts);
 });
 
 app.get('/all-facts', (req, res) => {
   let facts;
-  getDogFacts().then(result => {
+  let countFacts = req.query.count;
+  return getDogFacts(countFacts).then(result => {
     facts = result.data.facts;
     if (factsByCookie[req.cookies.cookieName] != undefined) {
       facts = addSavedFacts(facts, req.cookies.cookieName)
     }
-    res.status(200).json(facts)
+    res.status(200).json(facts);
   });
 });
 
@@ -67,12 +68,10 @@ function saveForm(cookieKey, fact) {
 }
 
 
-const getDogFacts = (factsNum) =>{
-  try{
-    return axios.get('https://dog-api.kinduff.com/api/facts?number=7')
-  } catch (error){
-    console.error(error)
-  }
+function getDogFacts(factsNum) {
+    return axios.get(`https://dog-api.kinduff.com/api/facts?number=${factsNum}`).catch(e => {
+      console.error(e);
+    })
 } 
 
 
