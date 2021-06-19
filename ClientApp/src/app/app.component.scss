@@ -1,0 +1,65 @@
+@import "../variables.scss";
+
+.container {
+  display: grid;
+  grid-template-rows: 30% 60% 10%;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navigation {
+  height: 100%;
+}
+
+.header-container {
+  background-color: $dark-slate-gray;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  padding: $padding-facts;
+  color: $dark-salmon;
+  display: flex;
+  flex-direction: column;
+}
+
+.facts-container {
+  font-size: 20px;
+  padding: $padding-facts;
+  background-color: $unbleached-silk;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  overflow: auto;
+}
+
+.submit-form-footer {
+  padding: $padding-facts;
+  background-color: $unbleached-silk;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.router-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 1px;
+}
+
+a {
+  color: $dark-slate-gray;
+  text-decoration: none;
+  font-size: larger;
+  margin: 12px;
+  border-radius: 6px;
+}
+
+.router {
+  background-color: $alice-blue;
+  align-items: center;
+  display: flex;
+  padding: 4px;
+  border: 1px $dark-slate-gray solid;
+}

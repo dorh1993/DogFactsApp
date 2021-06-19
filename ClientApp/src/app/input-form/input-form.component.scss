@@ -1,0 +1,15 @@
+@import "../../variables.scss";
+
+.icon-wrapper {
+  padding: 15px;
+}
+
+.icon {
+  color: $dark-slate-gray;
+  cursor: pointer;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}

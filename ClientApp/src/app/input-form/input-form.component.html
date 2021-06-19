@@ -1,0 +1,13 @@
+<div class="input-wrapper">
+    <div class="icon-wrapper" (click)="controlIconForm()">
+        <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon">{{iconType}}</mat-icon>
+    </div>
+    <div *ngIf="inputOpened">
+    <form class="form">
+        <mat-form-field>
+            <mat-label>{{label}}</mat-label>
+            <input matInput placeholder={{placeholder}} [ngModel]="value" (ngModelChange)="checkValueExist(value=$event)" [ngModelOptions]="{standalone:true}">
+        </mat-form-field>
+    </form>
+    </div>
+</div>

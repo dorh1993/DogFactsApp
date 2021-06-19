@@ -1,0 +1,13 @@
+<div class="facts-container">
+    <div class="title">{{ title }} </div>
+    <div *ngIf="!loading">
+        <div class="facts" *ngFor="let fact of facts; let i = index">
+            <div> {{i+1}}. </div>
+            <div>&nbsp; {{fact}}</div>
+        </div>
+    </div>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+</div>
+<div class="submit-form-footer">
+    <app-input-form (newFormEvent)="saveForm($event)" [placeholder]="inputPlaceHolder" [label]="inputLabel"> </app-input-form>
+</div>
