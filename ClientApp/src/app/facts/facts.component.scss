@@ -27,3 +27,10 @@
   color: $dark-salmon;
   padding-bottom: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+  .facts-container {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+}

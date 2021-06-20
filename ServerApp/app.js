@@ -11,28 +11,33 @@ let factsByCookie = {};
 
 // set a cookie
 app.use((req, res, next) => {
-  // check if client sent cookie
   let cookie = req.cookies.cookieName;
   if (cookie === undefined) {
-    // no: set a new cookie
-    let randomNumber = Math.random().toString();
-    randomNumber = randomNumber.substring(2, randomNumber.length);
-    res.cookie('cookieName', randomNumber, { maxAge: 900000, httpOnly: true });
-    console.log('cookie created successfully');
-  } else {
-    // yes, cookie was already present 
-    console.log('cookie exists', cookie);
-  }
+    randomCookie = make5Id();
+    res.cookie('cookieName', randomCookie, { maxAge: 900000, httpOnly: true });
+  } 
   next();
 });
 
+//create a 5 long id for cookie
+function make5Id() {
+  var result = '';
+  var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 5; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+ }
+ return result;
+}
 
+// this get path return the facts that are saved for the relevant cookie
 app.get('/my-facts', (req, res) => {
   if (!factsByCookie[req.cookies.cookieName]) return res.send([]);
   let cookieKey = req.cookies.cookieName
   res.status(200).json(factsByCookie[cookieKey].facts);
 });
 
+//this get path taked the count fact from the client and request from the given API the facts and then concats the saved facts from the relevant cookie
 app.get('/all-facts', (req, res) => {
   let facts;
   let countFacts = req.query.count;
@@ -45,17 +50,19 @@ app.get('/all-facts', (req, res) => {
   });
 });
 
+//this post path saves the new fact from the client in an object with cookie as a key (factsByCookie)
 app.post('/save-form', (req, res) => {
   let cookieKey = req.cookies.cookieName
   saveForm(cookieKey, req.body);
   res.send({ "success": "true" })
 })
 
-
+//function that cab add the saved facts to any array
 function addSavedFacts(result, cookieKey) {
   return result.concat(factsByCookie[cookieKey].facts);
 }
 
+//function that handles the saved facted -> In case factsByCookie object doesn't include the cookie - it will create one, else it will only push the fact
 function saveForm(cookieKey, fact) {
   if (!factsByCookie[cookieKey]) {
     factsByCookie[cookieKey] = {
@@ -67,13 +74,11 @@ function saveForm(cookieKey, fact) {
   }
 }
 
-
 function getDogFacts(factsNum) {
     return axios.get(`https://dog-api.kinduff.com/api/facts?number=${factsNum}`).catch(e => {
       console.error(e);
     })
 } 
-
 
 app.listen(port, () => {
   console.log(`Server listening on the port::${port}`);
